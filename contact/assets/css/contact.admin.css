@@ -1,0 +1,41 @@
+#personal-info-settings .section-desc p{
+	padding: 15px 0px;
+	border-bottom: 1px solid #d7d7d7;
+	margin-bottom: 0px;
+}
+
+#personal-info-settings .section-desc p:first-child {
+/* 	padding-top: 10px */
+}	
+
+#personal-info-settings .section-desc p:last-child{
+	border-bottom: none;	
+}
+
+#map-detail-setting p{
+	padding-top: 15px;
+}
+
+#map-detail-setting label{
+	margin-bottom: 15px;
+}
+
+#map-detail-setting .div{
+	margin: 15px 0px;
+}
+
+#map-detail-setting .advance-separator{
+	margin: 20px 0px;
+}
+
+#map-detail-setting label.advance{
+	margin-bottom: 30px;
+}
+
+#map-detail-setting p.note{
+	padding-top: 0px;
+}
+
+#map-detail-advance-setting{
+	display: none;
+}

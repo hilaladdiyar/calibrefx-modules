@@ -1,0 +1,22 @@
+/* Contact Widget Style */
+.contact-widget ul.fa-ul{
+	margin-left: 2.142857142857143em;
+}
+.contact-widget ul.fa-ul li{
+	padding: 0px;
+	border: none;	
+}	
+.contact-widget ul.fa-ul li + li{
+	border-top: none;	
+}
+
+
+/* Google Map Shortcode */
+.gmap-container img{
+	max-width: none;
+}
+.gmap-container *{
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+}

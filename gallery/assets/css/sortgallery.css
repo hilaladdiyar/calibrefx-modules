@@ -1,0 +1,145 @@
+/* Row & Column */
+.sortgallery-wrapper:before,
+.sortgallery-wrapper:after{
+	display: table;
+	content: '';
+}
+
+.sortgallery-wrapper:after{
+	clear: both;
+}
+
+.sortgallery-col{
+	width: 31%;
+	margin-right: 2%;
+	float: left;
+	margin-bottom: 20px;
+}
+
+.sortgallery-row{
+	margin-bottom: 40px;
+}
+
+/* Filtering Link */
+ul.item-filter{
+	margin: 0px 0px 20px;
+	padding: 0px 0px 1px;
+	list-style: none;
+	min-height: 32px;
+}
+
+ul.item-filter li{
+	display: inline-block;
+	margin-right: 15px;
+}
+
+ul.item-filter li a{
+	display: block;
+	padding: 5px 0px;
+	cursor: pointer;
+	border-bottom: 1px solid #E0E0E0;
+}
+
+ul.item-filter li a:hover,
+ul.item-filter li a.active{
+	text-decoration: none;
+	border-bottom: 2px solid #42B3E5;
+}
+
+/* Content Styling */
+.sortgallery-detail{
+	background: #F0F0F0;
+	padding: 10px;
+	text-align: center;
+}
+
+.sortgallery-detail .sortgallery-title{
+	margin-top: 0px;
+	margin-bottom: 5px;
+}
+
+.sortgallery-detail .sortgallery-desc{
+	margin: 0px;
+}
+
+.sortgallery-col:hover .sortgallery-detail{
+	background-color: #42B3E5;
+	cursor: pointer;
+}
+.sortgallery-col:hover .sortgallery-title,
+.sortgallery-col:hover .sortgallery-desc{
+	color: #fff;
+}
+
+.sortgallery-link{
+	position: relative;
+	display: block;
+}
+
+.sortgallery-hover{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0px;
+	left: 0px;
+	background: #fff url(../img/zoom_in.png) no-repeat center center;
+	opacity: 0.7;
+	filter: alpha(opacity=70);
+	display: none;
+}
+
+.sortgallery-link:hover .sortgallery-hover{
+	display: block;
+}
+
+/* Isotope Filtering */
+.isotope-item {
+  z-index: 2;
+}
+
+.isotope-hidden.isotope-item {
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Isotope CSS3 transitions */
+.isotope,
+.isotope .isotope-item {
+  -webkit-transition-duration: 0.8s;
+     -moz-transition-duration: 0.8s;
+      -ms-transition-duration: 0.8s;
+       -o-transition-duration: 0.8s;
+          transition-duration: 0.8s;
+}
+
+.isotope {
+  -webkit-transition-property: height, width;
+     -moz-transition-property: height, width;
+      -ms-transition-property: height, width;
+       -o-transition-property: height, width;
+          transition-property: height, width;
+}
+
+.isotope .isotope-item {
+  -webkit-transition-property: -webkit-transform, opacity;
+     -moz-transition-property:    -moz-transform, opacity;
+      -ms-transition-property:     -ms-transform, opacity;
+       -o-transition-property:      -o-transform, opacity;
+          transition-property:         transform, opacity;
+}
+
+/* disabling Isotope CSS3 transitions */
+.isotope.no-transition,
+.isotope.no-transition .isotope-item,
+.isotope .isotope-item.no-transition {
+  -webkit-transition-duration: 0s;
+     -moz-transition-duration: 0s;
+      -ms-transition-duration: 0s;
+       -o-transition-duration: 0s;
+          transition-duration: 0s;
+}
+
+/* Others */
+.sortgallery-thumb .bg-line{
+	margin-top: -10px;
+}
