@@ -6,7 +6,7 @@ global $calibrefx;
 if( $calibrefx::is_module_active( 'contact' ) ){
     $calibrefx->hooks->calibrefx_meta =  array(
         array( 'function' => 'contact_load_script', 'priority' => 10 )
-    )
+    );
 
     include_once 'contact_widget.php';
 }
@@ -16,10 +16,10 @@ if( is_admin() && $calibrefx::is_module_active( 'contact' ) ){
 
     $calibrefx->hooks->calibrefx_theme_settings_meta_section =  array(
         array( 'function' => 'contact_meta_sections', 'priority' => 10 )
-    )
+    );
     $calibrefx->hooks->calibrefx_theme_settings_meta_box =  array(
         array( 'function' => 'contact_meta_boxes', 'priority' => 10 )
-    )
+    );
 }
 
 function contact_load_script(){
