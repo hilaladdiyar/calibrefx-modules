@@ -58,7 +58,7 @@ function custom_design_save_core(){
     } 
 }
 
-function custom_design_logo(){
+function custom_design_logo(){ 
     global $post;
 
     $temp = $post;
@@ -108,7 +108,7 @@ p#description{
 
     $post = $temp;
 
-    wp_add_inline_style( 'calibrefx-style', $custom_css );
+    wp_add_inline_style( 'calibrefx-child-style', $custom_css );
 }
 
 function custom_design_favicon(){
@@ -224,6 +224,21 @@ function custom_design_logo_settings(){
         );
     } );
 
+    add_action( 'favicon-settings_options', function() {            
+        calibrefx_add_meta_option(
+            'favicon-settings',  // group id
+            'favicon_test', // field id and option name
+            __( 'Test', 'calibrefx' ), // Label
+            array(
+                'option_type' => 'texteditor',
+                'option_default' => '',
+                'option_filter' => 'safe_text',
+                'option_description' => __( 'Recommended image size 16 x 16 pixels', 'calibrefx' ),
+            ), // Settings config
+            1 //Priority
+        );
+    } );
+
     calibrefx_do_meta_options( $calibrefx->theme_settings, 'favicon-settings' );
 ?>
 <script type="text/javascript">
@@ -330,5 +345,5 @@ function custom_design_style(){
 
     $post = $temp;
 
-    wp_add_inline_style( 'calibrefx-style', $custom_css );
+    wp_add_inline_style( 'calibrefx-child-style', $custom_css );
 }

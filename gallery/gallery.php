@@ -7,7 +7,10 @@ if( $calibrefx::is_module_active( 'gallery' ) ){
     add_filter( 'query_vars', 'gallery_custom_page_variables' );
     add_action( 'init', 'gallery_register_posttype' );
     add_action( 'init', 'gallery_rewrite_rules' );
-    add_action( 'calibrefx_meta', 'gallery_load_scripts' );
+    
+    $calibrefx->hooks->calibrefx_meta = array(
+        array( 'function' => 'gallery_load_scripts', 'priority' => 10 )
+    );
 }
 
 function gallery_custom_page_variables( $public_query_vars ) {

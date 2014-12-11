@@ -6,11 +6,12 @@ if( $calibrefx::is_module_active( 'slider' ) ){
 }
 
 if( is_admin() && $calibrefx::is_module_active( 'slider' ) ){
-    add_action( 'admin_menu', 'slider_metabox',5 );
+    add_action( 'admin_menu', 'slider_metabox', 5 );
     add_action( 'save_post', 'slider_metabox_save', 1, 2 );
     add_action( 'calibrefx_theme_settings_meta_section', 'slider_meta_sections' );
     add_action( 'calibrefx_theme_settings_meta_box', 'slider_meta_boxes' );
-    add_action( apply_filters( 'calibrefx_slider_hook', 'calibrefx_after_header' ), 'slider_homepage_display' );
+
+    $calibrefx->hooks->add( apply_filters( 'calibrefx_slider_hook', 'calibrefx_after_header' ), 'slider_homepage_display', 10 );
 }
 
 /********************
