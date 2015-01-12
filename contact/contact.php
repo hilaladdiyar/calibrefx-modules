@@ -105,7 +105,7 @@ function contact_settings(){
                 'option_type' => 'textarea',
                 'option_default' => '',
                 'option_filter' => 'no_filter',
-                'option_description' => __("Enter your address. It will be shown if using the Contact Widget.", 'calibrefx' ),
+                'option_description' => __( "Enter your address. It will be shown if using the Contact Widget.", 'calibrefx' ),
             ), // Settings config
             1 //Priority
         );
@@ -253,7 +253,7 @@ function map_settings(){
 
     calibrefx_do_meta_options( $calibrefx->theme_settings, 'map-embed-advanced-settings' );
 
-    echo '<div id="map-detail-advance-setting"'.( calibrefx_get_option( 'map_advance_option' )  ? ' style="display:block;"' : '' ).'>';
+    echo '<div id="map-detail-advance-setting"' . ( calibrefx_get_option( 'map_advance_option' )  ? ' style="display:block;"' : '' ) . '>';
 
     calibrefx_add_meta_group( 'map-embed-advanced-detail-settings', 'map-embed-advanced-detail-settings', '' );
 
@@ -266,7 +266,7 @@ function map_settings(){
                 'option_type' => 'textinput',
                 'option_default' => '',
                 'option_filter' => 'no_html',
-                'option_description' => 'Enter the longitude coordinate of the location on google map.',
+                'option_description' => __( 'Enter the longitude coordinate of the location on google map.', 'calibrefx' ),
             ), // Settings config
             1 //Priority
         );
@@ -279,7 +279,7 @@ function map_settings(){
                 'option_type' => 'textinput',
                 'option_default' => '',
                 'option_filter' => 'no_html',
-                'option_description' => 'Enter the latitude coordinate of the location on google map.',
+                'option_description' => __( 'Enter the latitude coordinate of the location on google map.', 'calibrefx' ),
             ), // Settings config
             1 //Priority
         );
@@ -307,128 +307,182 @@ jQuery(document).ready(function($){
 
 /* Contact Shortcode
 ------------------------------------------------------------ */
-add_shortcode('map', 'contact_do_gmap');
-function contact_do_gmap($atts, $content = null) {
-    extract(shortcode_atts(array(
+add_shortcode( 'map', 'contact_do_gmap' );
+function contact_do_gmap( $atts, $content = null ) {
+    extract( shortcode_atts( array(
         'id' => '',
         'x' => '',
         'y' => '',
         'title' => '',
         'height' => '350'
-    ), $atts));
+    ), $atts ) );
 
-    if(empty($x) || empty($y)) return;
+    if( empty( $x ) || empty( $y ) ) return;
 
-    $id = ( $id == '' ) ? "random-googlemap-id-".rand(0,1000) : $id ;
+    $id = ( $id == '' ) ? "random-googlemap-id-" . rand( 0, 1000 ) : $id ;
 
-    $output = '<div class="gmap-container"><div class="thumbnail" style="height:'.$height.'px;"><div id="'.$id.'"  class="googlemap" style="width:100%; height:'.$height.'px;"></div></div></div>';
-    $output .= '<script type="text/javascript">eventMaps.push({id:"'.$id.'", x:"'.$x.'", y:"'.$y.'", title:"'.$title.'"});</script>';
+    $output = '<div class="gmap-container"><div class="thumbnail" style="height:' . $height . 'px;"><div id="' . $id . '"  class="googlemap" style="width:100%; height:' . $height . 'px;"></div></div></div>';
+    $output .= '<script type="text/javascript">eventMaps.push({id:"' . $id . '", x:"' . $x . '", y:"' . $y . '", title:"' . $title . '"});</script>';
 
     return $output;
 }
 
-add_shortcode('contact_map', 'contact_do_map');
-function contact_do_map($atts, $content = null) {
-    extract(shortcode_atts(array(
+add_shortcode( 'contact_map', 'contact_do_map' );
+function contact_do_map( $atts, $content = null ) {
+    extract( shortcode_atts( array(
         'type' => 'gmap',
         'height' => '300'
-    ), $atts));
+    ), $atts ) );
 
-    $map_x = stripslashes(esc_attr(calibrefx_get_option('map_x')));
-	$map_y = stripslashes(esc_attr(calibrefx_get_option('map_y')));
-	$map_url = stripslashes(esc_attr(calibrefx_get_option('map_url')));
+    $map_x = stripslashes( esc_attr( calibrefx_get_option( 'map_x' ) ) );
+	$map_y = stripslashes( esc_attr( calibrefx_get_option( 'map_y' ) ) );
+	$map_url = stripslashes( esc_attr( calibrefx_get_option( 'map_url' ) ) );
 
-    if($type == 'gmap'){
-    	$output = '[map x="'.$map_x.'" y="'.$map_y.'" height="'.$height.'"]';
-    }elseif($type == 'url'){
-    	$output = '[gmap]'.html_entity_decode($map_url).'[/gmap]';
+    if( $type == 'gmap' ){
+    	$output = '[map x="' . $map_x . '" y="' . $map_y . '" height="' . $height . '"]';
+    }elseif( $type == 'url' ){
+    	$output = '[gmap]' . html_entity_decode( $map_url ) . '[/gmap]';
     }else{
-    	$output = '<div class="alert alert-error">'.__('There is no map datas', 'calibrefx').'</div>';
+    	$output = '<div class="alert alert-error">' . __( 'There is no map datas', 'calibrefx' ) . '</div>';
     }
 
     return do_shortcode( $output );
 }
 
-add_shortcode('contact_name', 'contact_do_name');
-function contact_do_name($atts, $content = null) {
-    $contact_name = stripslashes(esc_attr(calibrefx_get_option('contact_name')));
+add_shortcode( 'contact_name', 'contact_do_name' );
+function contact_do_name( $atts, $content = null ) {
+    $contact_name = stripslashes( esc_attr( calibrefx_get_option( 'contact_name' ) ) );
 
     return $contact_name;
 }
 
-add_shortcode('contact_email', 'contact_do_email');
-function contact_do_email($atts, $content = null) {
-    $contact_email = stripslashes(esc_attr(calibrefx_get_option('contact_email')));
+add_shortcode( 'contact_email', 'contact_do_email' );
+function contact_do_email( $atts, $content = null ) {
+    extract( shortcode_atts( array(
+        'link' => 0
+    ), $atts ) );
+
+    $contact_email = stripslashes( esc_attr( calibrefx_get_option( 'contact_email' ) ) );
+
+    if( $link )
+        $contact_email = ( $contact_email ? '<a href="mailto:' . $contact_email . '">' . $contact_email . '</a>' : '' );
 
     return $contact_email;
 }
 
-add_shortcode('contact_phone', 'contact_do_phone');
-function contact_do_phone($atts, $content = null) {
-    $contact_phone = stripslashes(esc_attr(calibrefx_get_option('contact_phone')));
+add_shortcode( 'contact_phone', 'contact_do_phone' );
+function contact_do_phone( $atts, $content = null ) {
+    extract( shortcode_atts( array(
+        'link' => 0
+    ), $atts ) );
+
+    $contact_phone = stripslashes( esc_attr( calibrefx_get_option( 'contact_phone' ) ) );
+
+    if( $link ){
+        $phone = str_replace( array( '-', '(', ')', ' ', '.' ), '', $contact_phone );
+
+        $contact_phone = ( $contact_phone ? '<a href="tel:' . $phone . '">' . $contact_phone . '</a>' : '' );
+    }
 
     return $contact_phone;
 }
 
-add_shortcode('contact_mobile_phone', 'contact_do_mobile_phone');
-function contact_do_mobile_phone($atts, $content = null) {
-    $contact_mobile_phone = stripslashes(esc_attr(calibrefx_get_option('contact_mobile_phone')));
+add_shortcode( 'contact_mobile_phone', 'contact_do_mobile_phone' );
+function contact_do_mobile_phone( $atts, $content = null ) {
+    extract( shortcode_atts( array(
+        'link' => 0
+    ), $atts ) );
+
+    $contact_mobile_phone = stripslashes( esc_attr( calibrefx_get_option( 'contact_mobile_phone' ) ) );
+
+    if( $link ){
+        $mobile_phone = str_replace( array( '-', '(', ')', ' ', '.' ), '', $contact_mobile_phone );
+
+        $contact_mobile_phone = ( $contact_mobile_phone ? '<a href="tel:' . $mobile_phone . '">' . $contact_mobile_phone . '</a>' : '' );
+    }
 
     return $contact_mobile_phone;
 }
 
-add_shortcode('contact_address', 'contact_do_address');
-function contact_do_address($atts, $content = null) {
-    $contact_address = stripslashes(esc_attr(calibrefx_get_option('contact_address')));
+add_shortcode( 'contact_address', 'contact_do_address' );
+function contact_do_address( $atts, $content = null ) {
+    $contact_address = stripslashes( esc_attr( calibrefx_get_option( 'contact_address' ) ) );
 
     return $contact_address;
 }
 
-add_shortcode('contact_company_name', 'contact_do_company_name');
-function contact_do_company_name($atts, $content = null) {
-    $contact_company_name = stripslashes(esc_attr(calibrefx_get_option('contact_company_name')));
+add_shortcode( 'contact_company_name', 'contact_do_company_name' );
+function contact_do_company_name( $atts, $content = null ) {
+    $contact_company_name = stripslashes( esc_attr( calibrefx_get_option( 'contact_company_name' ) ) );
 
     return $contact_company_name;
 }
 
-add_shortcode('contact_company_email', 'contact_do_company_email');
-function contact_do_company_email($atts, $content = null) {
-    $contact_company_email = stripslashes(esc_attr(calibrefx_get_option('contact_company_email')));
+add_shortcode( 'contact_company_email', 'contact_do_company_email' );
+function contact_do_company_email( $atts, $content = null ) {
+    extract( shortcode_atts( array(
+        'link' => 0
+    ), $atts ) );
+
+    $contact_company_email = stripslashes( esc_attr( calibrefx_get_option( 'contact_company_email' ) ) );
+
+    if( $link )
+        $contact_company_email = ( $contact_company_email ? '<a href="mailto:' . $contact_company_email . '">' . $contact_company_email . '</a>' : '' );
 
     return $contact_company_email;
 }
 
-add_shortcode('contact_company_phone', 'contact_do_company_phone');
-function contact_do_company_phone($atts, $content = null) {
-    $contact_company_phone = stripslashes(esc_attr(calibrefx_get_option('contact_company_phone')));
+add_shortcode( 'contact_company_phone', 'contact_do_company_phone' );
+function contact_do_company_phone( $atts, $content = null ) {
+    extract( shortcode_atts( array(
+        'link' => 0
+    ), $atts ) );
+
+    $contact_company_phone = stripslashes( esc_attr( calibrefx_get_option( 'contact_company_phone' ) ) );
+
+    if( $link ){
+        $company_phone = str_replace( array( '-', '(', ')', ' ', '.' ), '', $contact_company_phone );
+
+        $contact_company_phone = ( $contact_company_phone ? '<a href="tel:' . $company_phone . '">' . $contact_company_phone . '</a>' : '' );
+    }
 
     return $contact_company_phone;
 }
 
-add_shortcode('contact_company_fax', 'contact_do_company_fax');
-function contact_do_company_fax($atts, $content = null) {
-    $contact_company_fax = stripslashes(esc_attr(calibrefx_get_option('contact_company_fax')));
+add_shortcode( 'contact_company_fax', 'contact_do_company_fax' );
+function contact_do_company_fax( $atts, $content = null ) {
+    extract( shortcode_atts( array(
+        'link' => 0
+    ), $atts ) );
+
+    $contact_company_fax = stripslashes( esc_attr( calibrefx_get_option( 'contact_company_fax' ) ) );
+
+    if( $link ){
+        $company_fax = str_replace( array( '-', '(', ')', ' ', '.' ), '', $contact_company_fax );
+
+        $contact_company_fax = ( $contact_company_fax ? '<a href="tel:' . $company_fax . '">' . $contact_company_fax . '</a>' : '' );
+    }
 
     return $contact_company_fax;
 }
 
-add_shortcode('contact_company_work_hour', 'contact_do_company_work_hour');
-function contact_do_company_work_hour($atts, $content = null) {
-    $contact_company_work_hour = stripslashes(esc_attr(calibrefx_get_option('contact_company_work_hour')));
+add_shortcode( 'contact_company_work_hour', 'contact_do_company_work_hour' );
+function contact_do_company_work_hour( $atts, $content = null ) {
+    $contact_company_work_hour = stripslashes( esc_attr( calibrefx_get_option( 'contact_company_work_hour' ) ) );
 
     return $contact_company_work_hour;
 }
 
-add_shortcode('contact_company_work_day', 'contact_do_company_work_day');
-function contact_do_company_work_day($atts, $content = null) {
-    $contact_company_work_day = stripslashes(esc_attr(calibrefx_get_option('contact_company_work_day')));
+add_shortcode( 'contact_company_work_day', 'contact_do_company_work_day' );
+function contact_do_company_work_day( $atts, $content = null ) {
+    $contact_company_work_day = stripslashes( esc_attr( calibrefx_get_option( 'contact_company_work_day' ) ) );
 
     return $contact_company_work_day;
 }
 
-add_shortcode('contact_company_address', 'contact_do_company_address');
-function contact_do_company_address($atts, $content = null) {
-    $contact_company_address = stripslashes(esc_attr(calibrefx_get_option('contact_company_address')));
+add_shortcode( 'contact_company_address', 'contact_do_company_address' );
+function contact_do_company_address( $atts, $content = null ) {
+    $contact_company_address = stripslashes( esc_attr( calibrefx_get_option( 'contact_company_address' ) ) );
 
     return $contact_company_address;
 }

@@ -75,13 +75,13 @@ class CFX_Contact_Widget extends WP_Widget {
                         $personal_info_output .= '<li class="contact-name"><i class="fa fa-li fa-user fa-fw icon-contact-name"></i>'.do_shortcode( '[contact_name]' ).'</li>';
                     }
                     if( $instance['show_email'] ){
-                        $personal_info_output .= '<li class="contact-email"><i class="fa fa-li fa-envelope fa-fw icon-contact-email"></i>'.do_shortcode( '[contact_email]' ).'</li>';
+                        $personal_info_output .= '<li class="contact-email"><i class="fa fa-li fa-envelope fa-fw icon-contact-email"></i>'.do_shortcode( '[contact_email link=1]' ).'</li>';
                     }
                     if( $instance['show_phone'] ){
-                        $personal_info_output .= '<li class="contact-phone"><i class="fa fa-li fa-phone fa-fw icon-contact-phone"></i>'.do_shortcode( '[contact_phone]' ).'</li>';
+                        $personal_info_output .= '<li class="contact-phone"><i class="fa fa-li fa-phone fa-fw icon-contact-phone"></i>'.do_shortcode( '[contact_phone link=1]' ).'</li>';
                     }
                     if( $instance['show_mobile_phone'] ){
-                        $personal_info_output .= '<li class="contact-fax"><i class="fa fa-li fa-mobile fa-fw icon-contact-mobile"></i>'.do_shortcode( '[contact_mobile_phone]' ).'</li>';
+                        $personal_info_output .= '<li class="contact-fax"><i class="fa fa-li fa-mobile fa-fw icon-contact-mobile"></i>'.do_shortcode( '[contact_mobile_phone link=1]' ).'</li>';
                     }
                     if( $instance['show_address'] ){
                         $personal_info_output .= '<li class="contact-address"><i class="fa fa-li fa-home fa-fw icon-contact-address"></i>'.nl2br(do_shortcode( '[contact_address]' )).'</li>';
@@ -107,13 +107,13 @@ class CFX_Contact_Widget extends WP_Widget {
                         $company_info_output .= '<li class="company-name"><i class="fa fa-li fa-users fa-fw icon-company-name"></i>'.do_shortcode( '[contact_company_name]' ).'</li>';
                     }
                     if( $instance['show_company_email'] ){
-                        $company_info_output .= '<li class="company-email"><i class="fa fa-li fa-envelope fa-fw icon-company-email"></i>'.do_shortcode( '[contact_company_email]' ).'</li>';
+                        $company_info_output .= '<li class="company-email"><i class="fa fa-li fa-envelope fa-fw icon-company-email"></i>'.do_shortcode( '[contact_company_email link=1]' ).'</li>';
                     }
                     if( $instance['show_company_phone'] ){
-                        $company_info_output .= '<li class="company-phone"><i class="fa fa-li fa-phone fa-fw icon-company-phone"></i>'.do_shortcode( '[contact_company_phone]' ).'</li>';
+                        $company_info_output .= '<li class="company-phone"><i class="fa fa-li fa-phone fa-fw icon-company-phone"></i>'.do_shortcode( '[contact_company_phone link=1]' ).'</li>';
                     }
                     if( $instance['show_company_fax'] ){
-                        $company_info_output .= '<li class="company-fax"><i class="fa fa-li fa-files-o fa-fw icon-company-fax"></i>'.do_shortcode( '[contact_company_fax]' ).'</li>';
+                        $company_info_output .= '<li class="company-fax"><i class="fa fa-li fa-files-o fa-fw icon-company-fax"></i>'.do_shortcode( '[contact_company_fax link=1]' ).'</li>';
                     }
                     if( $instance['show_company_work_day'] ){
                         $company_info_output .= '<li class="company-day"><i class="fa fa-li fa-calendar fa-fw icon-company-day"></i>'.do_shortcode( '[contact_company_work_day]' ).'</li>';
@@ -230,27 +230,6 @@ class CFX_Contact_Widget extends WP_Widget {
             <input type="checkbox" id="<?php echo $this->get_field_id( 'show_address' ); ?>" name="<?php echo $this->get_field_name( 'show_address' ); ?>" value="1" <?php if( $instance['show_address'] ) echo 'checked="checked"'; ?>/>
             <label for="<?php echo $this->get_field_id('show_address'); ?>"><?php _e( 'Show Address', 'calibrefx' ); ?></label>
         </p>
-
-        <hr class="div" />
-
-        <p>
-            <label for="<?php echo $this->get_field_id('show_map'); ?>"><strong><?php _e( 'Show Map', 'calibrefx' ); ?>:</strong></label>
-            <input type="checkbox" id="<?php echo $this->get_field_id( 'show_map' ); ?>" name="<?php echo $this->get_field_name( 'show_map' ); ?>" value="1" <?php if( $instance['show_map'] ) echo 'checked="checked"'; ?>/>
-        </p>
-        
-        <p>
-            <label for="<?php echo $this->get_field_id('map_type'); ?>"><?php _e( 'Map Type', 'calibrefx' ); ?>:</label><br />
-            <select name="<?php echo $this->get_field_name( 'map_type' ); ?>" id="<?php echo $this->get_field_id( 'map_type' ); ?>">
-                <option value="gmap"<?php selected( 'gmap', $instance['map_type'], true ); ?>>Google Map using Coordinates</option>
-                <option value="url"<?php selected( 'url', $instance['map_type'], true ); ?>>Google Map using Iframe</option>
-            </select>
-        </p>
-        
-        <p>
-            <label for="<?php echo $this->get_field_id('map_height'); ?>"><?php _e( 'Map Height', 'calibrefx' ); ?>:</label>
-            <input type="text" id="<?php echo $this->get_field_id( 'map_height' ); ?>" name="<?php echo $this->get_field_name( 'map_height' ); ?>" value="<?php echo esc_attr( $instance['map_height'] ); ?>" class="widefat" />
-        </p>
-        <p class="description" style="padding-bottom: 0px"><?php _e( 'Enter height for map. default: 180px', 'calibrefx' ); ?></p>
 
         <hr class="div" />
 
