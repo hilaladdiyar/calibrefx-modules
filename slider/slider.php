@@ -2,16 +2,18 @@
 global $calibrefx;
 
 if( $calibrefx::is_module_active( 'slider' ) ){
-    add_action( 'init', 'slider_register_posttype' );
+    $calibrefx->hooks->add( 'init', 'slider_register_posttype' );
+    $calibrefx->hooks->add( 'init', 'slider_set_theme_support' );
+    $calibrefx->hooks->add( 'calibrefx_meta', 'slider_load_scripts', 15 );
+
+    $calibrefx->hooks->add( 'calibrefx_after_header', 'slider_homepage_display', 15 );
 }
 
 if( is_admin() && $calibrefx::is_module_active( 'slider' ) ){
-    add_action( 'admin_menu', 'slider_metabox', 5 );
-    add_action( 'save_post', 'slider_metabox_save', 1, 2 );
-    add_action( 'calibrefx_theme_settings_meta_section', 'slider_meta_sections' );
-    add_action( 'calibrefx_theme_settings_meta_box', 'slider_meta_boxes' );
-
-    $calibrefx->hooks->add( apply_filters( 'calibrefx_slider_hook', 'calibrefx_after_header' ), 'slider_homepage_display', 10 );
+    $calibrefx->hooks->add( 'admin_menu', 'slider_metabox', 5 );
+    $calibrefx->hooks->add( 'save_post', 'slider_metabox_save', 1, 2 );
+    $calibrefx->hooks->add( 'calibrefx_theme_settings_meta_section', 'slider_meta_sections' );
+    $calibrefx->hooks->add( 'calibrefx_theme_settings_meta_box', 'slider_meta_boxes' );
 }
 
 /********************
@@ -69,6 +71,23 @@ function slider_register_posttype() {
     register_taxonomy( 'slidercat', 'slider', $tax_args );
 }
 
+function slider_set_theme_support(){
+    $calibrefx_wraps = get_theme_support( 'calibrefx-wraps' );
+
+    $calibrefx_wraps[0][] = 'slider';
+
+    add_theme_support( 'calibrefx-wraps', $calibrefx_wraps[0] );
+}
+
+function slider_load_scripts(){
+    if( is_child_theme() AND !get_theme_support( 'calibrefx-template-styles' ) ){
+        wp_enqueue_style( 'calibrefx-slider-style', SLIDER_URL . '/assets/css/calibrefx.slider.css' );
+    }  
+
+    wp_dequeue_script( 'jquery.cycle2.optional' );
+    wp_enqueue_script( 'calibrefx.jquery.cycle2.optional', SLIDER_URL . '/assets/js/jquery.cycle2.optional.js', array( 'jquery' ), '', false );
+}
+
 function slider_homepage_display(){
     $use_slider = calibrefx_get_option( 'use_slider' );
     $slider_category = calibrefx_get_option( 'slider_category' );
@@ -110,6 +129,9 @@ function slider_homepage_display(){
             $slider_class = apply_filters( 'calibrefx_slider_class', 'homepage-slider' );
             $slider_id = apply_filters( 'calibrefx_slider_id', 'homepage-slider' );
             echo '<div id="' . $slider_id . '">';
+
+            calibrefx_put_wrapper( 'slider', 'open' );
+
             echo '<div class="' . $slider_wrapper_class . '">';
 
             while( $query->have_posts() ) : $query->the_post();
@@ -132,6 +154,9 @@ function slider_homepage_display(){
             echo do_shortcode( '[slider' . $attr . ']' . $slider_output . '[/slider]' );
 
             echo '</div>';
+
+            calibrefx_put_wrapper( 'slider', 'close' );
+
             echo '</div>';
 
         endif;
@@ -412,7 +437,7 @@ function slider_detail_metabox(){
 function slider_metabox_save($post_id, $post){
     global $calibrefx;
 
-    if( !$calibrefx->security->verify_nonce( 'slider_detail_action', 'slider_detail_nonce' )){    
+    if( !$calibrefx->security->verify_nonce( 'slider_detail_action', 'slider_detail_nonce' ) ){    
         return $post_id; 
     }
 

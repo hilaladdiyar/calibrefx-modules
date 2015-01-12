@@ -1,0 +1,35 @@
+.testimonial-wrapper{
+    background: #eeeeee;
+    padding: 35px 30px 25px;
+    border-radius: 0px 0px 4px 4px;
+    position: relative;
+}
+.testimonial-name{
+    margin-top: 10px;
+    font-weight: semi-bold;
+    font-style: italic;
+}
+.testimonial-name .job-title{
+   
+}
+.quote-left,
+.quote-right{
+    width: 40px;
+    height: 32px;
+    position: absolute;
+    z-index: 9;
+}
+.quote-left{
+    top: 15px;
+    left: 15px;
+    background: url(../img/quote-left.png) no-repeat;
+}
+.quote-right{
+    bottom: 20px;
+    right: 15px;
+    background: url(../img/quote-right.png) no-repeat;
+}
+.testimonial-content-wrapper{
+   z-index: 10;
+    position: relative;   
+}
